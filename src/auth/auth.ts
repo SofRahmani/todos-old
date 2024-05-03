@@ -1,6 +1,6 @@
 import { env } from "@/env";
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
+import authConfig from "./auth.config"
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 
@@ -12,6 +12,9 @@ export const {
   signIn,
   signOut
 } = NextAuth({
+  session: {
+    strategy: "database",
+  },
   adapter: PrismaAdapter(prisma),
-  providers: [Google({ clientId: env.GOOGLE_CLIENT_ID, clientSecret: env.GOOGLE_CLIENT_SECRET })]
+  ...authConfig,
 });
