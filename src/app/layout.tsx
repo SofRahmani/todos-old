@@ -1,3 +1,4 @@
+import Sidebar from "@/components/sidebar/Sidebar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -17,12 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='dark'
-          enableSystem={true}
-        >
+      <body className={`${inter.className} flex flex-row overflow-hidden`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
+          <Sidebar />
           {children}
         </ThemeProvider>
       </body>
