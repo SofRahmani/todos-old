@@ -17,21 +17,16 @@ export default async function Home() {
   const task = await prisma.todo.findMany({
     where: {
       userId: session.user.id,
-      completed: false
-    },
-    orderBy: {
-      createdAt: "asc"
+      priority: true
     }
   });
 
   return (
     <main className="flex h-screen w-full flex-row items-start justify-start">
-      <TasksDashboard title="Mes tâches">
+      <TasksDashboard title="Mes tâches importantes">
         {task.length === 0 && (
-          <div className='size-full'>
-            <h1 className=" text-2xl">
-              Aucune tâche à afficher.
-            </h1>
+          <div className="size-full">
+            <h1 className=" text-2xl">Aucune tâche à afficher.</h1>
           </div>
         )}
         {task.map(task => (
@@ -45,7 +40,6 @@ export default async function Home() {
             dueDate={task.dueDate!}
           />
         ))}
-        
       </TasksDashboard>
     </main>
   );
