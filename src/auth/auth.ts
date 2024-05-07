@@ -12,9 +12,6 @@ export const {
   signIn,
   signOut
 } = NextAuth({
-  session: {
-    strategy: "database",
-  },
   adapter: PrismaAdapter(prisma),
   ...authConfig,
 });
