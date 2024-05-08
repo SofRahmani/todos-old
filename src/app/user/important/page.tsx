@@ -17,7 +17,8 @@ export default async function Home() {
   const task = await prisma.todo.findMany({
     where: {
       userId: session.user.id,
-      priority: true
+      priority: true,
+      completed: false
     }
   });
 

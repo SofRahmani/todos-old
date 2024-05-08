@@ -2,7 +2,12 @@
 import { signInAction } from "@/actions/auth.action";
 import { Button } from "@/components/ui/button";
 
-export default function LoginButton() {
+interface LoginButtonProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+export default function LoginButton({children, className}: LoginButtonProps) {
   return (
     <Button
       variant={"secondary"}
@@ -10,8 +15,9 @@ export default function LoginButton() {
       onClick={() => {
         signInAction();
       }}
+      className={className}
     >
-      Me connecter
+      {children}
     </Button>
   );
 }

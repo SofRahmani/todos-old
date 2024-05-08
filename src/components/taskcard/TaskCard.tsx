@@ -9,7 +9,6 @@ import {
 import CompleteButton from "./CompleteButton";
 import DeleteButton from "./DeleteButton";
 import ImportantFlagButton from "./ImportantFlagButton";
-import ModifiedButton from "./ModifiedButton";
 
 export interface TaskCardProps {
   completeStatus: boolean;
@@ -28,14 +27,13 @@ export default function TaskCard({
   dueDate,
   id
 }: TaskCardProps) {
-
   const formatDateToLocale = (date: Date) => {
-    return new Date(date).toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(date).toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
     });
-  }
+  };
 
   return (
     // eslint-disable-next-line tailwindcss/no-unnecessary-arbitrary-value
@@ -43,17 +41,26 @@ export default function TaskCard({
       <CardHeader className=" flex-1 ">
         <CardTitle className="line-clamp-2 overflow-hidden text-ellipsis">{title}</CardTitle>
         <CardDescription className=" line-clamp-5 text-ellipsis text-pretty">
-          {description}
+          {description ? (
+            description
+          ) : (
+            <p className="italic opacity-50">Aucune information supplémentaire</p>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent className=" flex items-center justify-between ">
-        <div className="flex-1">{dueDate && formatDateToLocale(dueDate)}</div>
-        <ImportantFlagButton status={priorityStatus} id={id} />
+        <div className="flex-1">
+          {dueDate ? (
+            formatDateToLocale(dueDate)
+          ) : (
+            <span className="italic text-muted-foreground opacity-50">Aucune date</span>
+          )}
+        </div>
       </CardContent>
       <CardFooter className=" flex items-center justify-between">
         <CompleteButton status={completeStatus} id={id} />
         <div className="flex items-center justify-center gap-2">
-          <ModifiedButton />
+          <ImportantFlagButton status={priorityStatus} id={id} />
           {completeStatus ? <DeleteButton id={id} /> : null}
         </div>
       </CardFooter>

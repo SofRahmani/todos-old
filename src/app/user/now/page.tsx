@@ -24,6 +24,7 @@ export default async function Home() {
         not: null,
         equals: new Date(today), // Convert today to a Date object
       },
+      completed: false,
     },
     orderBy: [
       {
